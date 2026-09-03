@@ -1,0 +1,660 @@
+# Complete Project Context — My Bad Customer
+
+## 1. My Current Situation and Background
+
+I am a full-stack web developer and I have already built multiple full-stack projects using the MERN stack.
+
+I am comfortable with the general concepts of:
+
+* Frontend and backend architecture
+* REST APIs
+* Authentication
+* CRUD operations
+* Databases
+* File uploads
+* Admin panels
+* Client-server architecture
+* Git/GitHub and deployment concepts
+
+However, I have never built a mobile application before.
+
+I am technically comfortable learning new technologies and I am confident that, with the help of AI, I can build and understand a mobile application even though mobile development is new to me.
+
+I do not need to understand every line of code in depth. My goal is to have a high-level understanding of what is happening in the project.
+
+For example, I want to understand:
+
+* What each major module does
+* How data flows from the mobile app to the backend
+* Which API is being called
+* What the backend does with the request
+* What is stored in the database
+* How different modules connect with each other
+
+I do not need deep explanations of every Flutter widget, NestJS decorator, package, or individual line of code.
+
+I will use AI extensively for development, implementation, debugging, planning, and learning.
+
+---
+
+# 2. Project Name
+
+**My Bad Customer**
+
+---
+
+# 3. Core Project Idea
+
+The idea is to create a platform where verified business owners can share and check information about customers who have caused business-related problems.
+
+A "Bad Customer" in this platform does not mean someone is personally bad. It refers to a customer who has caused a verified business owner a business loss, serious inconvenience, or time waste.
+
+Examples include:
+
+* Fraud
+* Payment fraud
+* Failure to make payment
+* Repeated late payments
+* Fake orders
+* Order cancellation after causing loss
+* Providing misleading information
+* Other actions that caused a business owner financial loss or significant time loss
+
+The main purpose of the platform is to help business owners make more informed decisions before doing business with a customer.
+
+---
+
+# 4. Initial Target Users
+
+The platform will initially target **Business Owners only**.
+
+It should not be limited to a specific industry.
+
+Examples of businesses that could potentially use the platform include:
+
+* Retail shops
+* Agricultural shops
+* Medicine/pesticide/herbicide shops
+* Builders
+* Suppliers
+* Service providers
+* Traders
+* Wholesalers
+* Other small and medium businesses
+
+The long-term goal is to potentially expand the platform across different business sectors.
+
+For the first version, however, the main users are:
+
+1. Business Owners
+2. Admins
+
+Customers themselves are not platform users in the initial version.
+
+---
+
+# 5. Business Owner Registration and Verification
+
+A business owner cannot immediately get full access to the platform.
+
+The flow should be:
+
+Business Owner registers
+↓
+Provides required personal and business information
+↓
+Account enters verification pending status
+↓
+Admin reviews the business information
+↓
+Admin verifies or rejects the business
+↓
+If approved, the user becomes a Verified Business Owner
+↓
+Verified Business Owner receives access to the platform
+
+The purpose of this verification process is to prevent random or fake users from submitting false reports against customers.
+
+Only verified business owners should be able to access sensitive business features such as reporting customers.
+
+---
+
+# 6. Customer Identification
+
+Customers will primarily be identified using:
+
+* Full Name
+* Mobile Number
+
+A verified business owner should be able to search for a customer using these details.
+
+The platform may later expand the customer identity model if necessary, but the initial system should focus on these basic identifiers.
+
+---
+
+# 7. Customer Search
+
+A verified business owner should be able to search for a customer.
+
+Example:
+
+Business Owner enters:
+
+* Customer Name
+* Mobile Number
+
+The system searches for relevant customer records and approved reports associated with that customer.
+
+The business owner should be able to see relevant information that helps them understand whether previous verified businesses have reported significant issues.
+
+Sensitive evidence should not be visible to other business owners.
+
+---
+
+# 8. Reporting a Customer
+
+If a verified business owner experiences a business-related issue with a customer, they should be able to submit a report.
+
+The reporting flow should include:
+
+1. Select Customer
+2. Select Issue Type
+3. Add a short written description
+4. Explain what happened
+5. Upload supporting evidence
+6. Submit the report
+
+Issue types may include examples such as:
+
+* Fraud
+* Payment Issue
+* Late Payment
+* Fake Order
+* Order Cancellation
+* Financial Loss
+* Time Loss
+* Other
+
+The business owner should be able to write a short explanation describing what happened.
+
+For example:
+
+"The customer placed an order and later refused to make payment."
+
+The exact reporting categories and final wording can be refined later.
+
+---
+
+# 9. Evidence System
+
+Evidence is an important part of the platform.
+
+When submitting a report, the business owner should be able to upload supporting evidence.
+
+Examples may include:
+
+* Screenshots
+* Payment-related screenshots
+* Bills
+* Invoices
+* Images
+* Other relevant documents, depending on the final supported file types
+
+The important privacy rule is:
+
+> Uploaded evidence should only be accessible to authorized administrators.
+
+Other business owners should not directly see the evidence files.
+
+The system should store and manage evidence securely.
+
+---
+
+# 10. Admin Report Review
+
+When a business owner submits a customer report, the report should not automatically become visible to other business owners.
+
+The flow should be:
+
+Business Owner submits report
+↓
+Report enters Pending Review status
+↓
+Admin reviews report details
+↓
+Admin reviews uploaded evidence
+↓
+Admin decides whether the report is valid
+↓
+Admin approves, rejects, or requests more information
+
+Possible report statuses can include:
+
+* Pending
+* Under Review
+* More Information Required
+* Approved
+* Rejected
+
+Only approved reports should be included in the information shown to other verified business owners.
+
+---
+
+# 11. Admin Responsibilities
+
+The Admin is a very important part of the platform.
+
+The Admin should be able to:
+
+### Business Management
+
+* View newly registered businesses
+* Review business information
+* Approve businesses
+* Reject businesses
+* Manage verification status
+
+### Customer Report Management
+
+* View submitted reports
+* Review issue details
+* Review descriptions
+* Access evidence
+* Approve reports
+* Reject reports
+* Request additional information
+
+### General Management
+
+The admin panel may also eventually include:
+
+* Dashboard
+* User/business management
+* Report statistics
+* Search and filters
+* Activity monitoring
+* Basic platform management
+
+The exact scope can be refined during development.
+
+---
+
+# 12. Privacy Principle
+
+Evidence and sensitive supporting files are private.
+
+The intended access model is:
+
+### Business Owner Who Submitted the Report
+
+Can view their own submitted report and its status.
+
+### Admin
+
+Can view:
+
+* Report details
+* Evidence
+* Business details
+* Review history
+
+### Other Verified Business Owners
+
+Can view only the information that the system is designed to expose from approved reports.
+
+They should not have direct access to private evidence files.
+
+---
+
+# 13. Mobile App
+
+The primary business owner application will be a mobile application.
+
+The application should initially target Android.
+
+However, the architecture and technology should support future iOS development without rebuilding the entire application from scratch.
+
+The chosen technology is:
+
+# Flutter + Dart
+
+Flutter will be used to build the mobile application.
+
+The goal is to maintain a largely shared codebase for:
+
+* Android
+* Future iOS application
+
+When iOS is added later, the main Flutter application code should largely remain the same, with potential platform-specific configuration and testing.
+
+---
+
+# 14. Mobile Application Responsibilities
+
+The Flutter application will handle:
+
+* User registration
+* Login
+* Authentication flow
+* Business profile
+* Verification status
+* Customer search
+* Customer information/results
+* Customer report submission
+* Issue selection
+* Description submission
+* Evidence selection/upload
+* Report status tracking
+* Push notification handling
+* User-facing app screens and navigation
+
+---
+
+# 15. Backend Technology
+
+The backend technology has been finalized as:
+
+# NestJS + TypeScript
+
+NestJS will handle the main backend APIs and business logic.
+
+The backend will manage areas such as:
+
+* Authentication
+* Authorization
+* User roles
+* Business registration
+* Business verification workflow
+* Customer records
+* Customer search
+* Customer reports
+* Report review workflow
+* Evidence metadata
+* Admin operations
+* Notification triggers
+* Database operations
+
+The mobile app should communicate with the backend through APIs.
+
+The general flow is:
+
+Flutter App
+↓
+REST API
+↓
+NestJS Backend
+↓
+Database / Storage / Notification Services
+
+---
+
+# 16. Database
+
+The chosen database is:
+
+# PostgreSQL
+
+PostgreSQL will store structured application data.
+
+Possible data areas include:
+
+* Users
+* Business information
+* Verification information
+* Customers
+* Customer reports
+* Report status
+* Evidence metadata
+* Admin reviews
+* Notifications
+* Other related structured data
+
+The exact database schema, tables, relationships, and constraints can be designed during the project planning and implementation process.
+
+---
+
+# 17. File and Evidence Storage
+
+The chosen file/media storage solution is:
+
+# Cloudinary
+
+Cloudinary will be used for uploaded evidence and other supported media files.
+
+The general conceptual flow should be:
+
+Business Owner selects file
+↓
+Flutter application uploads through the appropriate backend/storage flow
+↓
+Cloudinary stores the actual file
+↓
+The relevant file URL/reference/metadata is stored in PostgreSQL
+
+The database should not be used as the primary storage location for large image files.
+
+The database should store references and metadata related to the uploaded files.
+
+Evidence access must be designed carefully because evidence should only be accessible to authorized administrators and relevant permitted users.
+
+---
+
+# 18. Notifications
+
+The chosen push notification technology is:
+
+# Firebase Cloud Messaging (FCM)
+
+FCM will be used for mobile push notifications.
+
+Examples of potential notifications include:
+
+* Business verification approved
+* Business verification rejected
+* Report submitted successfully
+* Report approved
+* Report rejected
+* More information requested
+* Other important status updates
+
+The general flow may be:
+
+Admin performs an action
+↓
+NestJS backend detects the relevant event
+↓
+Backend triggers notification
+↓
+Firebase Cloud Messaging
+↓
+Push notification delivered to the mobile device
+
+FCM should support the mobile application for both Android and future iOS integration.
+
+---
+
+# 19. Admin Panel
+
+The Admin will use a separate Web Admin Panel.
+
+The admin panel is separate from the business owner mobile application.
+
+The Admin Panel will be used for:
+
+* Business verification
+* Viewing businesses
+* Reviewing reports
+* Viewing evidence
+* Approving/rejecting reports
+* Requesting additional information
+* General management
+
+The exact frontend technology for the web admin panel can be determined during implementation, but it should integrate with the same NestJS backend and PostgreSQL database.
+
+The architecture should look conceptually like:
+
+Business Owner
+↓
+Flutter Mobile App
+↓
+NestJS Backend
+↓
+PostgreSQL / Cloudinary / FCM
+
+Admin
+↓
+Web Admin Panel
+↓
+NestJS Backend
+↓
+Same PostgreSQL Database
+
+---
+
+# 20. Overall Technical Stack
+
+The currently finalized technology stack is:
+
+## Mobile Application
+
+**Flutter + Dart**
+
+## Backend
+
+**NestJS + TypeScript**
+
+## Database
+
+**PostgreSQL**
+
+## File/Media Storage
+
+**Cloudinary**
+
+## Push Notifications
+
+**Firebase Cloud Messaging (FCM)**
+
+## Administration
+
+**Separate Web Admin Panel**
+
+---
+
+# 21. Overall System Flow
+
+The high-level system flow is:
+
+Verified Business Owner
+↓
+Flutter Mobile Application
+↓
+REST APIs
+↓
+NestJS Backend
+↓
+Business Logic
+↓
+PostgreSQL Database
+
+For evidence:
+
+Flutter App
+↓
+Upload Flow
+↓
+Cloudinary
+↓
+Evidence Reference/Metadata
+↓
+PostgreSQL
+
+For notifications:
+
+Backend Event
+↓
+NestJS Notification Logic
+↓
+Firebase Cloud Messaging
+↓
+Mobile Device Notification
+
+For administration:
+
+Admin
+↓
+Web Admin Panel
+↓
+NestJS Backend
+↓
+PostgreSQL / Cloudinary
+
+---
+
+# 22. My Learning Approach
+
+I will use AI heavily during the development of this project.
+
+I want the project to be developed efficiently and relatively quickly, but I also want to learn the high-level basics of the technologies and architecture being used.
+
+I do not want extremely deep explanations of every line of code.
+
+Instead, when implementing a major module or feature, I prefer understanding:
+
+1. What this module does
+2. Which major files are involved
+3. How the request/data flows
+4. Which API is involved
+5. What happens in the backend
+6. What data is stored
+7. How this module connects to other modules
+
+For example, I should be able to understand:
+
+Flutter Screen
+↓
+API Request
+↓
+NestJS Controller
+↓
+Service / Business Logic
+↓
+Database
+↓
+Response
+↓
+Flutter UI Update
+
+That level of understanding is sufficient.
+
+---
+
+# 23. Important AI Development Preference
+
+AI should not blindly generate the entire project in a single step without structure.
+
+The project should remain understandable and modular.
+
+When implementing features, it is useful to maintain a clear understanding of:
+
+* Module purpose
+* Major files
+* API flow
+* Database impact
+* Integration points
+
+However, I will discuss the exact development workflow, module order, implementation plan, folder structure, and next steps separately with AI.
+
+This document is primarily intended to provide the complete context of:
+
+* Who I am as a developer
+* My current experience level
+* What I want to learn
+* What the My Bad Customer project is
+* What problem it is intended to solve
+* Who the users are
+* How the main business flow works
+* What technologies have already been finalized
+* The high-level architecture and privacy requirements
+
+The next planning and implementation decisions can be discussed based on this context.
