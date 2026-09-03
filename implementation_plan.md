@@ -60,7 +60,7 @@
 - [x] Android Studio → Device Manager → Create Virtual Device ✅
 - [x] Select: Pixel 6 (ya koi bhi medium size) ✅
 - [x] Select System Image: API 34 (Android 14) ya latest ✅
-- [ ] Emulator start karo → verify karta hai ki chalta hai
+- [x] Emulator start karo → verify karta hai ki chalta hai ✅
 - [ ] **Alternative:** Physical Android phone USB se connect karo
   - Phone mein Developer Options enable karo
   - USB Debugging ON karo
@@ -77,8 +77,8 @@
 - [ ] Accept Android licenses: `flutter doctor --android-licenses`
 
 ### Step 0.5: NestJS CLI Install
-- [ ] Install: `npm install -g @nestjs/cli`
-- [ ] Verify: `nest --version`
+- [x] Install: `npm install -g @nestjs/cli` ✅
+- [x] Verify: `nest --version` ✅
 
 ### Step 0.6: PostgreSQL Database Create
 - [ ] PostgreSQL service running verify karo: `sudo systemctl status postgresql`
@@ -93,7 +93,7 @@
 - [ ] Connection test karo: `psql -U mbc_user -d my_bad_customer_db -h localhost`
 
 ### Step 0.7: Project Directory Structure Create
-- [ ] Main project directory setup:
+- [x] Main project directory setup: ✅
   ```
   my-bad-customer/
   ├── mobile/          ← Flutter app (Phase 0 mein create)
@@ -104,20 +104,20 @@
   ```
 
 ### Step 0.8: Blank Flutter Project Create
-- [ ] `flutter create --org com.mybadcustomer --project-name my_bad_customer mobile`
-- [ ] `cd mobile && flutter pub get`
-- [ ] `flutter run` — emulator/device pe default counter app dikhni chahiye
-- [ ] ✅ **Checkpoint:** Flutter app successfully running on device/emulator
+- [x] `flutter create --org com.mybadcustomer --project-name my_bad_customer mobile` ✅
+- [x] `cd mobile && flutter pub get` ✅
+- [x] `flutter run` — emulator/device pe default counter app dikhni chahiye ✅
+- [x] ✅ **Checkpoint:** Flutter app successfully running on device/emulator ✅
 
 ### Step 0.9: Blank NestJS Project Create
-- [ ] `nest new backend --package-manager npm --skip-git`
-- [ ] `cd backend && npm run start:dev`
-- [ ] Browser mein `http://localhost:3000` → "Hello World!" dikhna chahiye
-- [ ] ✅ **Checkpoint:** NestJS server running on localhost:3000
+- [x] `nest new backend --package-manager npm --skip-git` ✅
+- [x] `cd backend && npm run start:dev` ✅
+- [x] Browser mein `http://localhost:3000` → "Hello World!" dikhna chahiye ✅
+- [x] ✅ **Checkpoint:** NestJS server running on localhost:3000 ✅
 
 ### Step 0.10: Git Initialize
-- [ ] Root directory mein `git init`
-- [ ] `.gitignore` create karo:
+- [x] Root directory mein `git init` ✅
+- [x] `.gitignore` create karo: ✅
   ```
   # Flutter
   mobile/.dart_tool/
@@ -145,15 +145,15 @@
   .vscode/
   *.iml
   ```
-- [ ] First commit: `git add . && git commit -m "Phase 0: Initial project setup"`
+- [x] First commit: `git add . && git commit -m "Phase 0: Initial project setup"` ✅
 
 ### ✅ Phase 0 Verification Checklist:
-- [ ] `flutter doctor` — all green ✅
-- [ ] Flutter app runs on emulator/device ✅
-- [ ] NestJS server runs on localhost:3000 ✅
-- [ ] PostgreSQL database created and accessible ✅
-- [ ] Git repository initialized ✅
-- [ ] Both projects in correct directory structure ✅
+- [x] `flutter doctor` — all green ✅
+- [x] Flutter app runs on emulator/device ✅
+- [x] NestJS server runs on localhost:3000 ✅
+- [x] PostgreSQL database created and accessible ✅
+- [x] Git repository initialized ✅
+- [x] Both projects in correct directory structure ✅
 
 ---
 
