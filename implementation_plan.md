@@ -768,7 +768,7 @@
 ## 2A — Backend: Auth Module
 
 ### Step 2.1: Complete Prisma Schema for Auth
-- [ ] `prisma/schema.prisma` mein add karo:
+- [x] `prisma/schema.prisma` mein add karo: ✅
   ```prisma
   model User {
     id                  String              @id @default(uuid())
@@ -802,11 +802,11 @@
     REJECTED
   }
   ```
-- [ ] Run: `npx prisma migrate dev --name init_user_table`
-- [ ] Verify table created: `npx prisma studio` (visual database browser)
+- [x] Run: `npx prisma db push` ✅
+- [x] Verify table created ✅
 
 ### Step 2.2: Create Auth DTOs (Data Transfer Objects)
-- [ ] Create `dto/register.dto.ts`:
+- [x] Create `dto/register.dto.ts`: ✅
   ```typescript
   // Validation rules:
   // fullName: required, string, min 2, max 100
@@ -815,18 +815,18 @@
   // password: required, min 8, must contain: uppercase, lowercase, number
   // confirmPassword: required, must match password
   ```
-- [ ] Create `dto/login.dto.ts`:
+- [x] Create `dto/login.dto.ts`: ✅
   ```typescript
   // emailOrPhone: required, string
   // password: required, string
   ```
-- [ ] Create `dto/refresh-token.dto.ts`:
+- [x] Create `dto/refresh-token.dto.ts`: ✅
   ```typescript
   // refreshToken: required, string
   ```
 
 ### Step 2.3: Auth Service Implementation
-- [ ] Create `auth.service.ts` with methods:
+- [x] Create `auth.service.ts` with methods: ✅
   ```
   register(registerDto):
     1. Check if email already exists → throw ConflictException
@@ -866,29 +866,29 @@
   ```
 
 ### Step 2.4: JWT Strategy & Guard
-- [ ] Create `strategies/jwt.strategy.ts`:
+- [x] Create `strategies/jwt.strategy.ts`: ✅
   ```typescript
   // Extract JWT from Authorization header (Bearer token)
   // Validate token → return user payload { id, email, role }
   ```
-- [ ] Create `guards/jwt-auth.guard.ts`:
+- [x] Create `guards/jwt-auth.guard.ts`: ✅
   ```typescript
   // Use JwtStrategy to validate
   // If invalid/expired → 401 Unauthorized
   ```
-- [ ] Create `guards/roles.guard.ts`:
+- [x] Create `guards/roles.guard.ts`: ✅
   ```typescript
   // Check user role against required roles
   // Usage: @Roles(Role.ADMIN) + @UseGuards(JwtAuthGuard, RolesGuard)
   ```
-- [ ] Create `decorators/current-user.decorator.ts`:
+- [x] Create `decorators/current-user.decorator.ts`: ✅
   ```typescript
   // Custom decorator to get current user from request
   // Usage: @CurrentUser() user: User
   ```
 
 ### Step 2.5: Auth Controller
-- [ ] Create `auth.controller.ts`:
+- [x] Create `auth.controller.ts`: ✅
   ```
   POST   /api/v1/auth/register     → register() [Public]
   POST   /api/v1/auth/login        → login()    [Public]
@@ -898,14 +898,14 @@
   ```
 
 ### Step 2.6: Auth Module Wire Up
-- [ ] Create `auth.module.ts`:
+- [x] Import/Export in `app.module.ts` ✅:
   - Import: JwtModule, PassportModule, PrismaModule
   - Providers: AuthService, JwtStrategy
   - Controllers: AuthController
   - Export: AuthService, JwtModule
 
 ### Step 2.7: Create Initial Admin User (Seed)
-- [ ] Create `prisma/seed.ts`:
+- [x] Create `prisma/seed.ts`: ✅
   ```typescript
   // Create default admin user:
   // email: admin@mybadcustomer.com
@@ -913,39 +913,39 @@
   // role: ADMIN
   // verificationStatus: APPROVED
   ```
-- [ ] Add seed script to `package.json`:
+- [x] Add seed script to `package.json`: ✅
   ```json
   "prisma": { "seed": "ts-node prisma/seed.ts" }
   ```
-- [ ] Run: `npx prisma db seed`
+- [x] Run: `npx prisma db seed` ✅
 
-### Step 2.8: Backend Auth Testing (Postman/Thunder Client)
-- [ ] Test Register:
+### Step 2.8: Backend Auth Testing
+- [x] Test Register: ✅
   ```
   POST http://localhost:3000/api/v1/auth/register
   Body: { fullName, email, phone, password, confirmPassword }
   Expected: 201 → { user, accessToken, refreshToken }
   ```
-- [ ] Test Register Validation:
+- [x] Test Register Validation: ✅
   ```
   - Missing fields → 400 with specific field errors
   - Duplicate email → 409 Conflict
   - Duplicate phone → 409 Conflict
   - Weak password → 400 validation error
   ```
-- [ ] Test Login:
+- [x] Test Login: ✅
   ```
   POST http://localhost:3000/api/v1/auth/login
   Body: { emailOrPhone, password }
   Expected: 200 → { user, accessToken, refreshToken }
   ```
-- [ ] Test Login Validation:
+- [x] Test Login Validation: ✅
   ```
   - Wrong email → 401 "Invalid credentials"
   - Wrong password → 401 "Invalid credentials"
   - Deactivated user → 403 Forbidden
   ```
-- [ ] Test Protected Route:
+- [x] Test Protected Route: ✅
   ```
   GET http://localhost:3000/api/v1/auth/profile
   Header: Authorization: Bearer <access_token>
