@@ -392,8 +392,8 @@
 ## 1B — Flutter Foundation (Mobile App)
 
 ### Step 1.11: Flutter Project Clean & Organize
-- [ ] Delete default counter app code from `lib/main.dart`
-- [ ] Create complete folder structure:
+- [x] Delete default counter app code from `lib/main.dart` ✅
+- [x] Create complete folder structure: ✅
   ```
   mobile/lib/
   ├── main.dart                        ← App entry point
@@ -483,7 +483,7 @@
   ```
 
 ### Step 1.12: Install Flutter Dependencies
-- [ ] Add dependencies to `pubspec.yaml`:
+- [x] Add dependencies to `pubspec.yaml`: ✅
   ```yaml
   dependencies:
     flutter:
@@ -523,7 +523,7 @@
 - [ ] Run: `flutter pub get`
 
 ### Step 1.13: App Theme & Design System
-- [ ] Create `app_colors.dart`:
+- [x] Create `app_colors.dart`: ✅
   ```dart
   // Professional dark + accent color scheme
   // Primary: Deep Blue (#1A237E → #3949AB)
@@ -536,14 +536,14 @@
   // Text Primary: Dark (#1A1A2E)
   // Text Secondary: Grey (#6B7280)
   ```
-- [ ] Create `app_theme.dart`:
+- [x] Create `app_theme.dart`: ✅
   - Light theme (primary)
   - Dark theme (optional, future)
   - Custom button themes
   - Input decoration theme (consistent text fields)
   - Card theme
   - AppBar theme
-- [ ] Create `app_text_styles.dart`:
+- [x] Create `app_text_styles.dart`: ✅
   - Heading 1-4
   - Body large/medium/small
   - Caption
@@ -556,7 +556,7 @@
   - Font sizes
 
 ### Step 1.14: API Client Setup (Dio)
-- [ ] Create `api_client.dart`:
+- [x] Create `api_client.dart`: ✅
   ```dart
   // Base Dio instance with:
   // - Base URL from config
@@ -567,7 +567,7 @@
   //                      500 (server error), 
   //                      network errors (no internet)
   ```
-- [ ] Create `api_endpoints.dart`:
+- [x] Create `api_endpoints.dart`: ✅
   ```dart
   class ApiEndpoints {
     static const String baseUrl = 'http://10.0.2.2:3000/api/v1'; // Android emulator → localhost
@@ -595,7 +595,7 @@
     static const String reportEvidence = '/reports'; // + /:id/evidence
   }
   ```
-- [ ] Create `api_exceptions.dart`:
+- [x] Create `api_exceptions.dart`: ✅
   ```dart
   // Custom exceptions:
   // - NetworkException (no internet)
@@ -607,7 +607,7 @@
   ```
 
 ### Step 1.15: Secure Storage Setup
-- [ ] Create `secure_storage.dart`:
+- [x] Create `secure_storage.dart`: ✅
   ```dart
   // Methods:
   // - saveAccessToken(String token)
@@ -621,7 +621,7 @@
   ```
 
 ### Step 1.16: API Response Model
-- [ ] Create `api_response_model.dart`:
+- [x] Create `api_response_model.dart`: ✅
   ```dart
   // Matches backend response format:
   class ApiResponse<T> {
@@ -644,32 +644,32 @@
   ```
 
 ### Step 1.17: Reusable Widgets Create
-- [ ] Create `custom_button.dart`:
+- [x] Create `custom_button.dart`: ✅
   - Primary button (filled, primary color)
   - Secondary button (outlined)
   - Loading state (spinner inside button)
   - Disabled state
   - Full width option
-- [ ] Create `custom_text_field.dart`:
+- [x] Create `custom_text_field.dart`: ✅
   - Label, hint, prefix/suffix icons
   - Validation error display
   - Password field (obscure toggle)
   - Phone number field
   - Multi-line field
-- [ ] Create `loading_widget.dart`:
+- [x] Create `loading_widget.dart`: ✅
   - Full screen loader
   - Inline loader
   - Shimmer skeleton (for lists)
-- [ ] Create `error_widget.dart`:
+- [x] Create `error_widget.dart`: ✅
   - Error message + Retry button
   - Network error variant
-- [ ] Create `empty_state_widget.dart`:
+- [x] Create `empty_state_widget.dart`: ✅
   - Icon + Message + Optional action button
-- [ ] Create `status_badge.dart`:
+- [x] Create `status_badge.dart`: ✅
   - Colored chip: Pending(yellow), Approved(green), Rejected(red), Under Review(blue)
 
 ### Step 1.18: Basic Navigation Setup (GoRouter)
-- [ ] Create `routes.dart`:
+- [x] Create `routes.dart`: ✅
   ```dart
   // Route names:
   // /splash
@@ -694,7 +694,7 @@
   ```
 
 ### Step 1.19: Main App Entry Point
-- [ ] Configure `main.dart`:
+- [x] Configure `main.dart`: ✅
   ```dart
   void main() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -724,19 +724,19 @@
   ```
 
 ### Step 1.20: Flutter Foundation Verify
-- [ ] App start ho bina error ke
-- [ ] Theme/colors apply ho
-- [ ] Navigation setup work kare (splash → welcome)
-- [ ] Git commit: `git commit -m "Phase 1B: Flutter foundation setup"`
+- [x] App start ho bina error ke ✅
+- [x] Theme/colors apply ho ✅
+- [x] Navigation setup work kare (splash → welcome) ✅
+- [x] Git commit: `git commit -m "Phase 1B: Flutter foundation setup"` ✅
 
 ### ✅ Phase 1 Verification Checklist:
-- [ ] Backend starts with no errors, global filters/interceptors working ✅
-- [ ] Prisma connected to PostgreSQL ✅
-- [ ] Flutter app starts with custom theme ✅
-- [ ] Folder structure complete for both projects ✅
-- [ ] Reusable widgets created and rendering correctly ✅
-- [ ] API client configured (Dio) ✅
-- [ ] Environment variables setup ✅
+- [x] Backend starts with no errors, global filters/interceptors working ✅
+- [x] Prisma connected to PostgreSQL ✅
+- [x] Flutter app starts with custom theme ✅
+- [x] Folder structure complete for both projects ✅
+- [x] Reusable widgets created and rendering correctly ✅
+- [x] API client configured (Dio) ✅
+- [x] Environment variables setup ✅
 
 ---
 
