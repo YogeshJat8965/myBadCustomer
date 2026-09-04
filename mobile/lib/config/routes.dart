@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../services/storage/secure_storage.dart';
+import '../screens/splash/splash_screen.dart';
+import '../screens/auth/welcome_screen.dart';
+import '../screens/auth/login_screen.dart';
+import '../screens/auth/register_screen.dart';
+import '../screens/auth/verification_pending_screen.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -28,23 +33,23 @@ class AppRouter {
     routes: [
       GoRoute(
         path: '/splash',
-        builder: (context, state) => const Scaffold(body: Center(child: Text('Splash Screen'))),
+        builder: (context, state) => const SplashScreen(),
       ),
       GoRoute(
         path: '/welcome',
-        builder: (context, state) => const Scaffold(body: Center(child: Text('Welcome Screen'))),
+        builder: (context, state) => const WelcomeScreen(),
       ),
       GoRoute(
         path: '/login',
-        builder: (context, state) => const Scaffold(body: Center(child: Text('Login Screen'))),
+        builder: (context, state) => const LoginScreen(),
       ),
       GoRoute(
         path: '/register',
-        builder: (context, state) => const Scaffold(body: Center(child: Text('Register Screen'))),
+        builder: (context, state) => const RegisterScreen(),
       ),
       GoRoute(
         path: '/verification-pending',
-        builder: (context, state) => const Scaffold(body: Center(child: Text('Verification Pending'))),
+        builder: (context, state) => const VerificationPendingScreen(),
       ),
       GoRoute(
         path: '/home',

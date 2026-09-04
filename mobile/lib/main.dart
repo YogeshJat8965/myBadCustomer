@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'config/theme/app_theme.dart';
 import 'config/routes.dart';
+import 'providers/auth_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,8 +11,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        // Placeholder for AuthProvider until it's created
-        Provider(create: (_) => 'AuthProvider_Placeholder'),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
       child: const MyBadCustomerApp(),
     ),
