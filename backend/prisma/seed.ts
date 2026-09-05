@@ -1,5 +1,6 @@
-import { PrismaClient, Role, VerificationStatus } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+import { Role, VerificationStatus } from '../src/common/enums/prisma-enums';
 
 const prisma = new PrismaClient();
 
@@ -16,6 +17,7 @@ async function main() {
       data: {
         fullName: 'System Administrator',
         email: adminEmail,
+        phone: '0000000000',
         password: hashedPassword,
         role: Role.ADMIN,
         verificationStatus: VerificationStatus.APPROVED,

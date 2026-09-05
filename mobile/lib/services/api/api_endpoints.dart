@@ -3,7 +3,7 @@ class ApiEndpoints {
   // we cannot use 10.0.2.2 (which is for emulator).
   // We need to use the local IP address of the laptop.
   // TODO: The user should replace '192.168.x.x' with their actual IP address.
-  static const String baseUrl = 'http://192.168.1.100:3000/api/v1';
+  static const String baseUrl = 'http://10.199.244.7:3000/api/v1';
 
   // Auth
   static const String register = '/auth/register';
@@ -13,9 +13,10 @@ class ApiEndpoints {
   static const String logout = '/auth/logout';
 
   // Business
-  static const String businessRegister = '/business/register';
-  static const String businessProfile = '/business/profile';
-  static const String businessUploadProof = '/business/upload-proof';
+  static const String businessRegister = '/business';
+  static const String businessProfile = '/business/my';
+  static const String businessUpdate = '/business/update';
+  static const String businessUploadProof = '/business/proof';
 
   // Search & Customer
   static const String searchCustomer = '/customers/search';

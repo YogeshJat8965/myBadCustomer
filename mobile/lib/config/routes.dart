@@ -6,6 +6,8 @@ import '../screens/auth/welcome_screen.dart';
 import '../screens/auth/login_screen.dart';
 import '../screens/auth/register_screen.dart';
 import '../screens/auth/verification_pending_screen.dart';
+import '../screens/business/business_register_screen.dart';
+import '../screens/business/verification_status_screen.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -49,7 +51,7 @@ class AppRouter {
       ),
       GoRoute(
         path: '/verification-pending',
-        builder: (context, state) => const VerificationPendingScreen(),
+        builder: (context, state) => const VerificationStatusScreen(),
       ),
       GoRoute(
         path: '/home',
@@ -57,7 +59,7 @@ class AppRouter {
       ),
       GoRoute(
         path: '/business/register',
-        builder: (context, state) => const Scaffold(body: Center(child: Text('Business Register'))),
+        builder: (context, state) => const BusinessRegisterScreen(),
       ),
       GoRoute(
         path: '/business/profile',

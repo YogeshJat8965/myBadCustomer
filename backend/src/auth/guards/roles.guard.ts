@@ -1,6 +1,6 @@
 import { Injectable, CanActivate, ExecutionContext, ForbiddenException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { Role } from '@prisma/client';
+import { Role } from '../../common/enums/prisma-enums';
 
 export const ROLES_KEY = 'roles';
 export const Roles = (...roles: Role[]) => {

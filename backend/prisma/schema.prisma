@@ -3,52 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
-}
-
-// -----------------------------------------------------
-// ENUMS
-// -----------------------------------------------------
-
-enum Role {
-  USER // Regular user using the app
-  BUSINESS // Garage/Mechanic, Dealership, etc.
-  ADMIN // Platform administrator
-}
-
-enum EntityType {
-  INDIVIDUAL
-  SOLE_PROPRIETOR
-  LLC
-  CORPORATION
-}
-
-enum SubscriptionTier {
-  FREE
-  PREMIUM
-  ENTERPRISE
-}
-
-enum ReportStatus {
-  DRAFT
-  PUBLISHED
-  DISPUTED
-  RESOLVED
-}
-
-enum DisputeStatus {
-  OPEN
-  UNDER_REVIEW
-  REJECTED
-  ACCEPTED
-}
-
-enum VerificationStatus {
-  PENDING
-  UNDER_REVIEW
-  APPROVED
-  REJECTED
 }
 
 // -----------------------------------------------------
@@ -57,164 +13,110 @@ enum VerificationStatus {
 
 model User {
   id                 String             @id @default(uuid())
-  fullName           String?
+  fullName           String
   email              String             @unique
-  phone              String?            @unique
+  phone              String             @unique
   password           String
-  role               Role               @default(USER)
+  role               String             @default("BUSINESS_OWNER") // Role enum replaced with String
   isActive           Boolean            @default(true)
-  verificationStatus VerificationStatus @default(PENDING)
+  verificationStatus String             @default("PENDING")        // VerificationStatus enum replaced with String
   refreshToken       String?
   lastLoginAt        DateTime?
-  avatarUrl          String?
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
 
-  // Relations
-  businessProfile BusinessProfile?
-  reportsCreated  Report[]         @relation("ReportAuthor")
-  disputesFiled   Dispute[]        @relation("DisputeFiler")
-  subscriptions   Subscription[]
-  notifications   Notification[]
-  auditLogs       AuditLog[]       @relation("AuditUser")
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  business      Business?
+  reports       Report[]
+  notifications Notification[]
 }
 
-model BusinessProfile {
-  id     String @id @default(uuid())
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  businessName   String
-  entityType     EntityType
-  registrationNo String? // CIN, GST, etc. depending on country
-  taxId          String?
-
-  // Address
-  addressLine1 String
-  addressLine2 String?
-  city         String
-  state        String
-  zipCode      String
-  country      String
-
-  // Verification
-  isVerified       Boolean  @default(false)
-  verificationDocs String[] // URLs to uploaded docs
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Business {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  businessName    String
+  businessType    String
+  businessCategory String?
+  ownerName       String
+  address         String
+  city            String
+  state           String
+  pincode         String
+  gstNumber       String?
+  panNumber       String?
+  businessProofUrl String?            // Cloudinary URL
+  businessProofPublicId String?       // For deletion
+  additionalInfo  String?
+  rejectionReason String?             // If admin rejects
+  verifiedAt      DateTime?
+  verifiedBy      String?             // Admin user ID
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 // -----------------------------------------------------
-// REPORTING & BLACKLISTING
+// CUSTOMER & REPORTING
 // -----------------------------------------------------
+
+model Customer {
+  id              String    @id @default(uuid())
+  fullName        String
+  phone           String
+  normalizedPhone String    @unique     // Phone without +91, spaces, dashes
+  addedBy         String                // First reporter's userId
+  totalReports    Int       @default(0)
+  approvedReports Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  reports         Report[]
+
+  @@index([fullName])
+  @@index([normalizedPhone])
+}
 
 model Report {
-  id String @id @default(uuid())
+  id              String       @id @default(uuid())
+  customerId      String
+  customer        Customer     @relation(fields: [customerId], references: [id])
+  reporterId      String
+  reporter        User         @relation(fields: [reporterId], references: [id])
+  issueType       String                                           // IssueType enum replaced with String
+  title           String
+  description     String                                           // @db.Text removed for SQLite
+  amount          Float?       // Financial loss amount (optional)
+  incidentDate    DateTime?    // When the incident happened
+  status          String       @default("PENDING")                 // ReportStatus enum replaced with String
+  adminNotes      String?                                          // @db.Text removed for SQLite
+  adminId         String?      // Reviewing admin
+  reviewedAt      DateTime?
+  moreInfoRequest String?                                          // @db.Text removed for SQLite
+  moreInfoResponse String?                                         // @db.Text removed for SQLite
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
 
-  // Author who created the report
-  authorId String
-  author   User   @relation("ReportAuthor", fields: [authorId], references: [id])
-
-  // Offender details (The "Bad Customer" or "Bad Business")
-  offenderName    String
-  offenderPhone   String?
-  offenderEmail   String?
-  offenderDetails String // Description of why they are reported
-
-  // The Incident
-  incidentDate DateTime
-  amountOwed   Float? // If it's a financial dispute
-  evidenceUrls String[] // Photos, invoices, chats
-
-  status      ReportStatus @default(PUBLISHED)
-  isAnonymous Boolean      @default(false)
-
-  // Relations
-  disputes  Dispute[]
-  auditLogs AuditLog[] @relation("AuditReport")
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Indexes for quick searching
-  @@index([offenderPhone])
-  @@index([offenderEmail])
-  @@index([offenderName])
+  evidence        Evidence[]
 }
 
-model Dispute {
-  id String @id @default(uuid())
-
-  // The report being disputed
-  reportId String
-  report   Report @relation(fields: [reportId], references: [id], onDelete: Cascade)
-
-  // The person filing the dispute (usually the offender who claimed their profile)
-  filerId String
-  filer   User   @relation("DisputeFiler", fields: [filerId], references: [id])
-
-  reason         String
-  evidenceUrls   String[]
-  status         DisputeStatus @default(OPEN)
-  resolutionNote String? // Admin's note after resolving
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Evidence {
+  id              String   @id @default(uuid())
+  reportId        String
+  report          Report   @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  fileUrl         String
+  filePublicId    String   // Cloudinary public_id for deletion
+  fileType        String   // image/jpeg, image/png, application/pdf
+  fileName        String
+  fileSize        Int      // bytes
+  uploadedAt      DateTime @default(now())
 }
-
-// -----------------------------------------------------
-// MONETIZATION & SUBSCRIPTION
-// -----------------------------------------------------
-
-model Subscription {
-  id     String @id @default(uuid())
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  tier      SubscriptionTier @default(FREE)
-  startDate DateTime         @default(now())
-  endDate   DateTime?
-
-  stripeCustId String?
-  stripeSubId  String?
-
-  isActive Boolean @default(true)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-// -----------------------------------------------------
-// SYSTEM & AUDIT
-// -----------------------------------------------------
 
 model Notification {
-  id     String @id @default(uuid())
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  title  String
-  body   String
-  isRead Boolean @default(false)
-  data   Json? // Any extra payload (like route to navigate to)
-
-  createdAt DateTime @default(now())
-}
-
-model AuditLog {
-  id String @id @default(uuid())
-
-  userId String?
-  user   User?   @relation("AuditUser", fields: [userId], references: [id], onDelete: SetNull)
-
-  action  String // e.g., "REPORT_CREATED", "DISPUTE_RESOLVED"
-  details String
-
-  reportId String?
-  report   Report? @relation("AuditReport", fields: [reportId], references: [id], onDelete: SetNull)
-
-  ipAddress String?
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  body      String
+  isRead    Boolean  @default(false)
+  data      String?  // Json replaced with String for SQLite
   createdAt DateTime @default(now())
 }
